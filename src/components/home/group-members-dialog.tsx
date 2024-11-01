@@ -1,50 +1,61 @@
-import { Laugh, Mic, Plus, Send } from "lucide-react";
-import { Input } from "../ui/input";
-import { useState } from "react";
-import { Button } from "../ui/button";
+import { users } from "@/dummy-data/db";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import { Avatar, AvatarFallback, AvatarImage } from "../ui/avatar";
+import { Crown } from "lucide-react";
 
-const MessageInput = () => {
-  const [msgText, setMsgText] = useState("");
-
+const GroupMembersDialog = () => {
   return (
-    <div className="bg-gray-primary p-2 flex gap-4 items-center">
-      <div className="relative flex gap-2 ml-2">
-        {/* EMOJI PICKER WILL GO HERE */}
-        <Laugh className="text-gray-600 dark:text-gray-400" />
-        <Plus className="text-gray-600 dark:text-gray-400" />
-      </div>
-      <Plus />
-      <form className="w-full flex gap-3">
-        <div className="flex-1">
-          <Input
-            type="text"
-            placeholder="Type a message"
-            className="py-2 text-sm w-full rounded-lg shadow-sm bg-gray-tertiary focus-visible:ring-transparent"
-            value={msgText}
-            onChange={(e) => setMsgText(e.target.value)}
-          />
-        </div>
-        <div className="mr-4 flex items-center gap-3">
-          {msgText.length > 0 ? (
-            <Button
-              type="submit"
-              size={"sm"}
-              className="bg-transparent text-foreground hover:bg-transparent"
-            >
-              <Send />
-            </Button>
-          ) : (
-            <Button
-              type="submit"
-              size={"sm"}
-              className="bg-transparent text-foreground hover:bg-transparent"
-            >
-              <Mic />
-            </Button>
-          )}
-        </div>
-      </form>
-    </div>
+    <Dialog>
+      <DialogTrigger>
+        <p className="text-xs text-muted-foreground text-left">See members</p>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle className="my-2">Current Members</DialogTitle>
+          <DialogDescription>
+            <div className="flex flex-col gap-3 ">
+              {users?.map((user) => (
+                <div
+                  key={user._id}
+                  className={`flex gap-3 items-center p-2 rounded`}
+                >
+                  <Avatar className="overflow-visible">
+                    {user.isOnline && (
+                      <div className="absolute top-0 right-0 w-2 h-2 bg-green-500 rounded-full border-2 border-foreground" />
+                    )}
+                    <AvatarImage
+                      src={user.image}
+                      className="rounded-full object-cover"
+                    />
+                    <AvatarFallback>
+                      <div className="animate-pulse bg-gray-tertiary w-full h-full rounded-full"></div>
+                    </AvatarFallback>
+                  </Avatar>
+
+                  <div className="w-full ">
+                    <div className="flex items-center gap-2">
+                      <h3 className="text-md font-medium">
+                        {user.name || user.email.split("@")[0]}
+                      </h3>
+                      {user.admin && (
+                        <Crown size={16} className="text-yellow-400" />
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </DialogDescription>
+        </DialogHeader>
+      </DialogContent>
+    </Dialog>
   );
 };
-export default MessageInput;
+export default GroupMembersDialog;
