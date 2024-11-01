@@ -1,3 +1,3 @@
 export default function Home() {
-  return <div>NextAPP</div>;
+  return <div className="bg-red-600">NextAPP</div>;
 }
