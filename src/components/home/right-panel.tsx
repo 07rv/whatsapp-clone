@@ -8,6 +8,7 @@ import GroupMembersDialog from "./group-members-dialog";
 
 const RightPanel = () => {
   const selectedConversation = true;
+  const isGroup = true;
   if (!selectedConversation) return <ChatPlaceHolder />;
 
   const conversationName = "John Doe";
@@ -26,7 +27,7 @@ const RightPanel = () => {
             </Avatar>
             <div className="flex flex-col">
               <p>{conversationName}</p>
-              {/* {isGroup && <GroupMembersDialog />} */}
+              {isGroup && <GroupMembersDialog />}
             </div>
           </div>
 
