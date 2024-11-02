@@ -10,8 +10,6 @@ http.route({
   handler: httpAction(async (ctx, req) => {
     const payloadString = await req.text();
     const headerPayload = req.headers;
-    window.alert(123);
-    console.log("--------------------");
 
     try {
       const result = await ctx.runAction(internal.clerk.fulfill, {
@@ -25,8 +23,6 @@ http.route({
 
       switch (result.type) {
         case "user.created":
-          console.log("--------------------------------------");
-
           await ctx.runMutation(internal.users.createUser, {
             tokenIdentifier: `${process.env.CLERK_APP_DOMAIN}|${result.data.id}`,
             email: result.data.email_addresses[0]?.email_address,
