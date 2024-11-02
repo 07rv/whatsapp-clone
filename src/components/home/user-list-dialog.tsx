@@ -18,6 +18,7 @@ import { ImageIcon, MessageSquareDiff } from "lucide-react";
 import { Id } from "../../../convex/_generated/dataModel";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
+import toast from "react-hot-toast";
 
 const UserListDialog = () => {
   const [selectedUsers, setSelectedUsers] = useState<Id<"users">[]>([]);
@@ -79,6 +80,7 @@ const UserListDialog = () => {
         : users?.find((user) => user._id === selectedUsers[0])?.name;
     } catch (err) {
       console.error(err);
+      toast.error("Failed to create converstion");
     } finally {
       setIsLoading(false);
     }
