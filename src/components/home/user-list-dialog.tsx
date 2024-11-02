@@ -37,6 +37,13 @@ const UserListDialog = () => {
 
   const setSelectedConversation = null;
 
+  const closeUserListDialog = () => {
+    dialogCloseRef.current?.click();
+    setSelectedUsers([]);
+    setGroupName("");
+    setSelectedImage(null);
+  };
+
   const handleCreateConversation = async () => {
     if (selectedUsers.length === 0) return;
     setIsLoading(true);
@@ -182,7 +189,9 @@ const UserListDialog = () => {
           ))}
         </div>
         <div className="flex justify-between">
-          <Button variant={"outline"}>Cancel</Button>
+          <Button onClick={closeUserListDialog} variant={"outline"}>
+            Cancel
+          </Button>
           <Button
             onClick={handleCreateConversation}
             disabled={
