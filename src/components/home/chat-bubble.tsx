@@ -33,7 +33,6 @@ const ChatBubble = ({ me, message, previousMessage }: ChatBubbleProps) => {
       ? "bg-white dark:bg-gray-primary"
       : "bg-blue-500 text-white";
 
-  console.log(message.sender);
   const [open, setOpen] = useState(false);
 
   const renderMessageContent = () => {
@@ -55,7 +54,7 @@ const ChatBubble = ({ me, message, previousMessage }: ChatBubbleProps) => {
     return (
       <>
         <DateIndicator message={message} previousMessage={previousMessage} />
-        <div className="flex gap-1 w-2/3">
+        <div className="flex gap-1 w-2/4">
           <ChatBubbleAvatar
             isGroup={isGroup}
             isMember={isMember}
@@ -63,7 +62,7 @@ const ChatBubble = ({ me, message, previousMessage }: ChatBubbleProps) => {
             fromAI={fromAI}
           />
           <div
-            className={`flex flex-col z-20 max-w-fit px-2 pt-1 rounded-md shadow-md relative ${bgClass}`}
+            className={`flex z-20 max-w-fit px-2 pt-1 rounded-md shadow-md relative ${bgClass}`}
           >
             {!fromAI && <OtherMessageIndicator />}
             {fromAI && (
@@ -91,7 +90,7 @@ const ChatBubble = ({ me, message, previousMessage }: ChatBubbleProps) => {
 
       <div className="flex gap-1 w-2/3 ml-auto">
         <div
-          className={`flex  z-20 max-w-fit px-2 pt-1 rounded-md shadow-md ml-auto relative ${bgClass}`}
+          className={`flex z-20 max-w-fit px-2 pt-1 rounded-md shadow-md ml-auto relative ${bgClass}`}
         >
           <SelfMessageIndicator />
           {renderMessageContent()}
