@@ -13,6 +13,7 @@ import toast from "react-hot-toast";
 import { useMutation, useQuery } from "convex/react";
 import { api } from "../../../convex/_generated/api";
 import { useConversationStore } from "@/store/chat-store";
+import ReactPlayer from "react-player";
 
 const MediaDropdown = () => {
   const imageInput = useRef<HTMLInputElement>(null);
@@ -95,7 +96,7 @@ const MediaDropdown = () => {
       <input
         type="file"
         ref={videoInput}
-        accept="video/mp4"
+        accept="video/*, .mov"
         onChange={(e) => setSelectedVideo(e.target?.files![0])}
         hidden
       />
@@ -223,9 +224,9 @@ const MediaVideoDialog = ({
       <DialogContent>
         <DialogDescription>Video</DialogDescription>
         <div className="w-full">
-          {/* {renderedVideo && (
+          {renderedVideo && (
             <ReactPlayer url={renderedVideo} controls width="100%" />
-          )} */}
+          )}
         </div>
         <Button
           className="w-full"

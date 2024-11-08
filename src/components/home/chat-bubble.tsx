@@ -5,7 +5,7 @@ import DateIndicator from "./date-indicator";
 import Image from "next/image";
 import { useState } from "react";
 import { Dialog, DialogContent, DialogDescription } from "../ui/dialog";
-// import ReactPlayer from "react-player";
+import ReactPlayer from "react-player";
 // import ChatAvatarActions from "./chat-avatar-actions";
 import { Bot } from "lucide-react";
 
@@ -111,14 +111,15 @@ export default ChatBubble;
 
 const VideoMessage = ({ message }: { message: IMessage }) => {
   return (
-    <h1>2erf</h1>
-    // <ReactPlayer
-    //   url={message.content}
-    //   width="250px"
-    //   height="250px"
-    //   controls={true}
-    //   light={true}
-    // />
+    <div className="w-[250px] h-[250px] m-2 relative">
+      <ReactPlayer
+        url={message.content}
+        width="250px"
+        height="250px"
+        controls={true}
+        light={true}
+      />
+    </div>
   );
 };
 
